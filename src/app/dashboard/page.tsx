@@ -54,6 +54,22 @@ const stats: StatCard[] = [
     accent: "rgba(124,109,250,0.12)",
     glow: "rgba(124,109,250,0.25)",
   },
+  {
+    label: "Total Views",
+    value: "0",
+    sub: "analytics coming soon",
+    icon: "👁️",
+    accent: "rgba(232,121,249,0.1)",
+    glow: "rgba(232,121,249,0.2)",
+  },
+  {
+    label: "Brand Deals",
+    value: "0",
+    sub: "no deals yet",
+    icon: "🤝",
+    accent: "rgba(52,211,153,0.08)",
+    glow: "rgba(52,211,153,0.2)",
+  },
 ];
 
   const quickActions = [
