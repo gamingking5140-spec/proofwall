@@ -8,6 +8,7 @@ type Proof = {
   title: string;
   description: string;
   emoji: string;
+  image_url: string;
   created_at?: string;
 };
 
@@ -254,6 +255,13 @@ export default function ProfilePage() {
                       marginBottom: "0.4rem",
                     }}
                   >
+                    {proof.image_url && (
+  <img
+    src={proof.image_url}
+    alt={proof.title}
+    className="w-full rounded-2xl mb-4"
+  />
+)}
                     {proof.title}
                   </h3>
                   <p style={{ color: "var(--muted)", fontSize: "0.88rem", lineHeight: 1.6 }}>

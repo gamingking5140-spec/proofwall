@@ -7,6 +7,7 @@ export default function CreatePage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
 
   const handlePublish = async () => {
     if (!title || !description) {
@@ -20,22 +21,44 @@ export default function CreatePage() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    console.log(user);
-
     if (!user) {
       alert("You are not logged in");
       setLoading(false);
       return;
     }
 
-    const { error } = await supabase.from("proofs").insert([
-      {
-        title,
-        description,
-        emoji: "🚀",
-        user_id: user.id,
-      },
-    ]);
+let imageUrl = "";
+
+if (image) {
+  const fileName = Date.now() + "-" + image.name;
+
+  const { error: uploadError } = await supabase.storage
+    .from("proof-images")
+    .upload(fileName, image);
+
+  if (uploadError) {
+    console.log(uploadError);
+    alert("Image upload failed");
+    setLoading(false);
+    return;
+  }
+
+  const { data } = supabase.storage
+    .from("proof-images")
+    .getPublicUrl(fileName);
+
+  imageUrl = data.publicUrl;
+}
+
+const { error } = await supabase.from("proofs").insert([
+  {
+    title,
+    description,
+    emoji: "🚀",
+    user_id: user.id,
+    image_url: imageUrl,
+  },
+]);
 
     setLoading(false);
 
@@ -47,6 +70,7 @@ export default function CreatePage() {
 
       setTitle("");
       setDescription("");
+      setImage(null);
     }
   };
 
@@ -58,6 +82,7 @@ export default function CreatePage() {
         </h1>
 
         <div className="space-y-6">
+
           <div>
             <label className="block mb-2 text-zinc-400">
               Proof Title
@@ -85,6 +110,23 @@ export default function CreatePage() {
             />
           </div>
 
+          <div>
+            <label className="block mb-2 text-zinc-400">
+              Upload Proof Image
+            </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setImage(e.target.files[0]);
+                }
+              }}
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+            />
+          </div>
+
           <button
             onClick={handlePublish}
             disabled={loading}
@@ -92,6 +134,7 @@ export default function CreatePage() {
           >
             {loading ? "Publishing..." : "Publish Proof"}
           </button>
+
         </div>
       </div>
     </main>

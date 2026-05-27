@@ -14,15 +14,15 @@ export default function LoginPage() {
       }
     });
   }, [router]);
-
-  const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:3000/dashboard",
-      },
-    });
-  };
+  
+const signInWithGoogle = async () => {
+  await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${window.location.origin}/dashboard`,
+    },
+  });
+};
 
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center">
