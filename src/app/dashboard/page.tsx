@@ -45,32 +45,16 @@ export default function DashboardPage() {
     setLoaded(true);
   };
 
-  const stats: StatCard[] = [
-    {
-      label: "Total Proofs",
-      value: proofCount,
-      sub: "on your wall",
-      icon: "🏆",
-      accent: "rgba(124,109,250,0.12)",
-      glow: "rgba(124,109,250,0.25)",
-    },
-    {
-      label: "Total Views",
-      value: "1.2M",
-      sub: "+18% this month",
-      icon: "👁️",
-      accent: "rgba(232,121,249,0.1)",
-      glow: "rgba(232,121,249,0.2)",
-    },
-    {
-      label: "Brand Deals",
-      value: "8",
-      sub: "via ProofWall",
-      icon: "🤝",
-      accent: "rgba(52,211,153,0.08)",
-      glow: "rgba(52,211,153,0.2)",
-    },
-  ];
+const stats: StatCard[] = [
+  {
+    label: "Total Proofs",
+    value: proofCount,
+    sub: "on your wall",
+    icon: "🏆",
+    accent: "rgba(124,109,250,0.12)",
+    glow: "rgba(124,109,250,0.25)",
+  },
+];
 
   const quickActions = [
     { href: "/create",  label: "Add New Proof", icon: "✦", primary: true },
