@@ -145,7 +145,7 @@ const stats: StatCard[] = [
         </div>
 
         {/* Stats grid */}
-        <div className="grid sm:grid-cols-3 gap-4 mb-10">
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           {stats.map(({ label, value, sub, icon, accent, glow }, i) => (
             <div
               key={label}

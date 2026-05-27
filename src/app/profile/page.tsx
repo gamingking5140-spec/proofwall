@@ -158,9 +158,9 @@ export default function ProfilePage() {
           >
             {[
               { value: proofs.length, label: "Proofs" },
-              { value: "1.2M",  label: "Total Views" },
-              { value: "340K",  label: "Subscribers" },
-              { value: "8",     label: "Brand Deals" },
+{ value: "0", label: "Total Views" },
+{ value: "0", label: "Subscribers" },
+{ value: "0", label: "Brand Deals" },
             ].map(({ value, label }) => (
               <div key={label}>
                 <div className="stat-number" style={{ fontSize: "1.4rem" }}>{value}</div>
